@@ -24,9 +24,7 @@ GLOBAL_SEED = 1234
 def connect_to_spark():
     print("Connect to spark ...")
     conf = SparkConf()
-    conf.setMaster("spark://localhost:7077")
-    #conf.set("spark.driver.host", "192.168.1.39")
-    #conf.set("spark.driver.memory", "14g")
+    conf.set("spark.driver.memory", "14g")
     conf.set("spark.kryoserializer.buffer.max", "1024")
     conf.set("spark.jars.packages",
              "org.mlflow:mlflow-spark:1.25.1,org.apache.hadoop:hadoop-aws:3.3.1,com.amazonaws:aws-java-sdk-bundle:1.12.220")
@@ -46,7 +44,7 @@ def load_data(spark):
     print("Loading data ...")
     return spark. \
         read. \
-        parquet("s3://data/fraud2.parquet"). \
+        parquet("fraud2.parquet"). \
         withColumn("isFraud", col("isFraud").cast(DoubleType())). \
         withColumnRenamed("isFraud", "label")
 
@@ -200,10 +198,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# mlflow models serve -m models:/logistic-regression/Production -h 0.0.0.0 -p 5002
-
-# spark-submit --conf spark.kryoserializer.buffer.max=1024 --conf spark.jars.packages=org.mlflow:mlflow-spark:1.25.1,org.apache.hadoop:hadoop-aws:3.3.1,com.amazonaws:aws-java-sdk-bundle:1.12.220 --master spark://localhost:7077 train.py
-
-
-#spark-submit --conf spark.kryoserializer.buffer.max=1024 --conf fs.s3a.access.key=admin --conf spark.jars.packages=org.mlflow:mlflow-spark:1.25.1,org.apache.hadoop:hadoop-aws:3.3.1,com.amazonaws:aws-java-sdk-bundle:1.12.220 --conf fs.s3a.fast.upload=true --conf fs.s3.impl=org.apache.hadoop.fs.s3a.S3AFileSystem --conf fs.s3a.aws.credentials.provider=org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider --conf fs.s3a.path.style.access=true --conf fs.s3a.secret.key=sample_key --conf fs.s3a.endpoint=http://s3:9000 --master spark://localhost:7077 train.py
