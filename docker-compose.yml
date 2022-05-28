@@ -13,7 +13,7 @@ services:
     command: server /data --console-address ":9001"
 
   db:
-    image: mysql/mysql-server:5.7.28
+    image: mysql:latest
     restart: unless-stopped
     container_name: mlflow_db
     expose:
@@ -31,7 +31,7 @@ services:
     image: tracker_ml
     restart: unless-stopped
     build:
-      context: ./mlflow
+      context: mlflow-server
       dockerfile: Dockerfile
     ports:
       - "5001:5000"
