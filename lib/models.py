@@ -11,8 +11,8 @@ def train_logistic_regression(train_data, **kwargs):
                                  outputCols=["nameOrigIdx", "nameDestIdx", "typeIdx"], handleInvalid="keep")
     type_encoder = OneHotEncoder(inputCol="typeIdx", outputCol="typeEnc")
     assembler_tr = VectorAssembler(
-        # inputCols=["step", "amount", "oldbalanceOrg", "newbalanceOrig", "typeEnc", "nameOrigIdx", "nameDestIdx"],
-        inputCols=["amount", "oldbalanceOrg", "newbalanceOrig", "typeEnc"],
+        inputCols=["amount", "oldbalanceOrg", "oldBalanceDest", "newbalanceOrig", "newBalanceDest", "typeEnc", "nameOrigIdx", "nameDestIdx"],
+        # inputCols=["amount", "oldbalanceOrg", "newbalanceOrig", "typeEnc"],
         outputCol="features")
     model = LogisticRegression(**kwargs, featuresCol="features", labelCol="label")
 
@@ -43,8 +43,8 @@ def train_linear_svc(train_data, **kwargs):
                                  outputCols=["nameOrigIdx", "nameDestIdx", "typeIdx"], handleInvalid="keep")
     type_encoder = OneHotEncoder(inputCol="typeIdx", outputCol="typeEnc")
     assembler_tr = VectorAssembler(
-        # inputCols=["step", "amount", "oldbalanceOrg", "oldbalanceDest", "newbalanceOrig", "newbalanceDest", "typeEnc"],
-        inputCols=["amount", "oldbalanceOrg", "newbalanceOrig", "typeEnc"],
+        inputCols=["amount", "oldbalanceOrg", "oldBalanceDest", "newbalanceOrig", "newBalanceDest", "typeEnc", "nameOrigIdx", "nameDestIdx"],
+        #inputCols=["amount", "oldbalanceOrg", "newbalanceOrig", "typeEnc"],
         outputCol="features")
     model = LinearSVC(**kwargs)
 

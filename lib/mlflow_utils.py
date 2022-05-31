@@ -33,7 +33,7 @@ def store_model_in_mlflow(model, train_data, model_name):
                                   input_example=train_data_no_label.limit(5).toPandas())
 
 
-def store_confusion_matrix(predictions, data, file_name):
+def store_confusion_matrix(predictions, file_name):
     print("Creating confusion matrix ...")
     confusion_matrix = calculate_confusion_matrix(predictions)
 
@@ -44,6 +44,21 @@ def store_confusion_matrix(predictions, data, file_name):
     ax.set_ylabel('Actual Values');
     ax.xaxis.set_ticklabels(['False', 'True'])
     ax.yaxis.set_ticklabels(['False', 'True'])
+    plt.tight_layout()
+    plt.savefig(file_name)
+    plt.clf()
+
+    mlflow.log_artifact(file_name)
+    os.remove(file_name)
+
+
+def store_feature_importances(feature_importances, file_name):
+    print("Creating feature importances graph ...")
+    fig, ax = plt.subplots()
+    p1 = ax.bar(list(feature_importances.keys()), list(feature_importances.values()))
+    ax.xaxis.set_tick_params(rotation=90)
+    ax.bar_label(p1, label_type='center', rotation=90, fmt='%.2f')
+    plt.tight_layout()
     plt.savefig(file_name)
     plt.clf()
 

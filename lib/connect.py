@@ -48,11 +48,13 @@ def load_data_csv(spark, filename):
         option("header", True). \
         csv(filename). \
         withColumn("isFraud", col("isFraud").cast(DoubleType())). \
+        withColumn("step", col("step").cast(DoubleType())). \
         withColumn("oldBalanceOrig", col("oldBalanceOrig").cast(DoubleType())). \
         withColumn("newBalanceOrig", col("newBalanceOrig").cast(DoubleType())). \
         withColumn("amount", col("amount").cast(DoubleType())). \
         withColumn("oldBalanceDest", col("oldBalanceDest").cast(DoubleType())). \
         withColumn("newBalanceDest", col("newBalanceDest").cast(DoubleType())). \
+        withColumn("isFlaggedFraud", col("isFlaggedFraud").cast(DoubleType())). \
         withColumnRenamed("isFraud", "label"). \
         withColumnRenamed("action", "type"). \
         withColumnRenamed("oldBalanceOrig", "oldbalanceOrg"). \

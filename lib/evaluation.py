@@ -1,5 +1,5 @@
 from pyspark.ml.evaluation import BinaryClassificationEvaluator, MulticlassClassificationEvaluator
-
+from itertools import chain
 
 def evaluate_model(model, test_data, prefix=""):
     print("Evaluating the model ...")
@@ -22,3 +22,12 @@ def evaluate_model(model, test_data, prefix=""):
 def calculate_confusion_matrix(predictions):
     return predictions.select(['prediction', 'label']).groupby("label").pivot(
         "prediction").count().drop("label").toPandas() / predictions.count()
+
+
+def calculate_feature_importance(predictions, coefficients, features_col="features"):
+    attrs = sorted(
+        (attr["idx"], attr["name"]) for attr in (chain(*predictions
+                                                       .schema[features_col]
+                                                       .metadata["ml_attr"]["attrs"].values())))
+
+    return {name: coefficients[idx] for idx, name in attrs}
