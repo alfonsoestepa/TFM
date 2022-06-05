@@ -12,8 +12,8 @@ if __name__ == "__main__":
     dataset = orig_dataset. \
         union(new_dataset)
 
-    do_train_and_store_info_in_ml_flow(dataset, train_random_forrest, GLOBAL_SEED, model_params={"seed": GLOBAL_SEED}, split_weights=[0.75, 0.25],)
-    #do_train_and_store_info_in_ml_flow(dataset, train_logistic_regression)
-    #do_train_and_store_info_in_ml_flow(dataset, train_linear_svc)
+    do_train_and_store_info_in_ml_flow(dataset, train_random_forrest, GLOBAL_SEED, model_params={"seed": GLOBAL_SEED})
+    do_train_and_store_info_in_ml_flow(dataset, train_logistic_regression, GLOBAL_SEED)
+    do_train_and_store_info_in_ml_flow(dataset, train_linear_svc, GLOBAL_SEED)
 
     print("Ok.")

@@ -44,19 +44,19 @@ if __name__ == "__main__":
 
     spark = connect_to_spark()
     raw_dataset = load_data_csv(spark, "data/train_test/fraud.csv")
-    #do_train_and_store_info_in_ml_flow(raw_dataset, train_logistic_regression, GLOBAL_SEED)
-    # do_train_and_store_info_in_ml_flow(raw_dataset, train_logistic_regression, GLOBAL_SEED, model_params={"regParam": 0.1})
-    # do_train_and_store_info_in_ml_flow(raw_dataset, train_logistic_regression, GLOBAL_SEED, model_params={"regParam": 0.01})
-    # do_train_and_store_info_in_ml_flow(raw_dataset, train_logistic_regression, GLOBAL_SEED, model_params={"regParam": 1})
-    #
-    # do_train_and_store_info_in_ml_flow(raw_dataset, train_random_forrest, GLOBAL_SEED, model_params={"seed": GLOBAL_SEED})
+    do_train_and_store_info_in_ml_flow(raw_dataset, train_logistic_regression, GLOBAL_SEED)
+    do_train_and_store_info_in_ml_flow(raw_dataset, train_logistic_regression, GLOBAL_SEED, model_params={"regParam": 0.1})
+    do_train_and_store_info_in_ml_flow(raw_dataset, train_logistic_regression, GLOBAL_SEED, model_params={"regParam": 0.01})
+    do_train_and_store_info_in_ml_flow(raw_dataset, train_logistic_regression, GLOBAL_SEED, model_params={"regParam": 1})
+
+    do_train_and_store_info_in_ml_flow(raw_dataset, train_random_forrest, GLOBAL_SEED, model_params={"seed": GLOBAL_SEED})
     do_train_and_store_info_in_ml_flow(raw_dataset, train_random_forrest, GLOBAL_SEED, model_params={"seed": GLOBAL_SEED, "numTrees": 5})
-    # do_train_and_store_info_in_ml_flow(raw_dataset, train_random_forrest, GLOBAL_SEED, model_params={"seed": GLOBAL_SEED, "numTrees": 50})
-    # do_train_and_store_info_in_ml_flow(raw_dataset, train_random_forrest, GLOBAL_SEED, model_params={"seed": GLOBAL_SEED, "numTrees": 100})
-    #
-    #do_train_and_store_info_in_ml_flow(raw_dataset, train_linear_svc, GLOBAL_SEED)
-    # do_train_and_store_info_in_ml_flow(raw_dataset, train_linear_svc, GLOBAL_SEED, model_params={"regParam": 0.1})
-    # do_train_and_store_info_in_ml_flow(raw_dataset, train_linear_svc, GLOBAL_SEED, model_params={"regParam": 0.01})
-    # do_train_and_store_info_in_ml_flow(raw_dataset, train_linear_svc, GLOBAL_SEED, model_params={"regParam": 1})
+    do_train_and_store_info_in_ml_flow(raw_dataset, train_random_forrest, GLOBAL_SEED, model_params={"seed": GLOBAL_SEED, "numTrees": 50})
+    do_train_and_store_info_in_ml_flow(raw_dataset, train_random_forrest, GLOBAL_SEED, model_params={"seed": GLOBAL_SEED, "numTrees": 100})
+
+    do_train_and_store_info_in_ml_flow(raw_dataset, train_linear_svc, GLOBAL_SEED)
+    do_train_and_store_info_in_ml_flow(raw_dataset, train_linear_svc, GLOBAL_SEED, model_params={"regParam": 0.1})
+    do_train_and_store_info_in_ml_flow(raw_dataset, train_linear_svc, GLOBAL_SEED, model_params={"regParam": 0.01})
+    do_train_and_store_info_in_ml_flow(raw_dataset, train_linear_svc, GLOBAL_SEED, model_params={"regParam": 1})
 
     print("Ok.")

@@ -10,7 +10,7 @@ from .evaluation import calculate_confusion_matrix
 
 
 def store_dataset_in_mlflow(dataset):
-    print("Storing data in mlflow-server ...")
+    print("Storing data in mlflow ...")
     active_run = mlflow.active_run()
     temp_file = "fraud-{}.parquet".format(active_run.info.run_id)
     dataset.write.parquet(temp_file)
@@ -19,7 +19,7 @@ def store_dataset_in_mlflow(dataset):
 
 
 def store_model_in_mlflow(model, train_data, model_name):
-    print("Storing model in mlflow-server ...")
+    print("Storing model in mlflow ...")
 
     params_to_store = {param[0].name: param[1] for param in model.stages[-1].extractParamMap().items()}
     mlflow.log_params(params_to_store)

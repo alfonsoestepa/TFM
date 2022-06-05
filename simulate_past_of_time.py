@@ -4,7 +4,6 @@ from lib.connect import connect_to_spark, load_data_csv
 
 if __name__ == "__main__":
     spark = connect_to_spark()
-    #data = load_data_csv(spark, "../PaySim/outputs/PS_20220529132440_261072141/PS_20220529132440_261072141_rawLog.csv")
     data = load_data_csv(spark, "data/phase2/validation/raw_fraud.csv")
 
     data.groupby("type", "label").count().show()

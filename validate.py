@@ -7,9 +7,9 @@ from src.lib.mlflow_utils import store_confusion_matrix
 
 if __name__ == "__main__":
     spark = connect_to_spark()
-    validation_data = load_data_csv(spark, "data/validation/fraud.csv")
-    #validation_data = load_data_csv(spark, "data/phase2/validation/fraud_future.csv")
-    model_to_load = "models:/fraud/5"
+    #validation_data = load_data_csv(spark, "data/validation/fraud.csv")
+    validation_data = load_data_csv(spark, "data/phase2/validation/fraud_future.csv")
+    model_to_load = "models:/fraud/Production"
     model = mlflow.spark.load_model(model_to_load)
 
     with mlflow.start_run():
